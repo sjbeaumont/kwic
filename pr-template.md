@@ -8,7 +8,7 @@
 
 ## Type of Change
 * [ ] Bug fix (non-breaking change fixing an issue)
-* [ ] New feature (non-breaking change adding functionality) 
+* [ ] New feature (non-breaking change adding fucntionality) 
 * [ ] Breaking change (fix or feature causing existing feature(s) to break)
 * [ ] FIle tree change (changing source tree layout)
 * [ ] Documentation update
