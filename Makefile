@@ -12,8 +12,8 @@ CFLAGS = -Wall -Wextra -O2
 TARGET = kwic
 
 # src files and objs
-SRCS = kwic.c flags.c other.c
-OBJS = kwic.o flags.o other.o
+SRCS = kwic.c args.c other.c
+OBJS = kwic.o args.o other.o
 
 # rule (make)
 all: $(TARGET)
@@ -23,11 +23,11 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
 
 # .c -> .o
-kwic.o: kwic.c include/other.h include/flags.h
+kwic.o: kwic.c include/other.h include/args.h
 	$(CC) $(CFLAGS) -c kwic.c
 
-flags.o: flags.c include/flags.h include/other.h
-	$(CC) $(CFLAGS) -c flags.c
+args.o: args.c include/args.h include/other.h
+	$(CC) $(CFLAGS) -c args.c
 
 other.o: other.c include/other.h
 	$(CC) $(CFLAGS) -c other.c

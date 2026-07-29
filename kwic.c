@@ -17,7 +17,7 @@ char renameValue[4096]; // used to store value when renaming
 
 
 #include "include/other.h"
-#include "include/flags.h"
+#include "include/args.h"
 
 
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     snprintf(tempKwicdP, sizeof(tempKwicdP), "%s/.local/share/kwic/kwicd-temp.txt", home);
 
     for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-n") == 0) { // make append
+        if (strcmp(argv[i], "-n") == 0) { // make entry
             if (i + 2 >= argc) { usage(); return 1; }
             append(argv[i + 1], argv[i + 2], kwicdP);
             i += 2;
@@ -66,14 +66,9 @@ int main(int argc, char *argv[]) {
             i += 2;
         }
 
-        else if (strcmp(argv[i], "ls") == 0) {
-            char cmd[256 + 16];
-            snprintf(cmd, sizeof(cmd), "cat '%s'", kwicdP);
-            system(cmd);
-            printf("\n");
-        }
+        else if (strcmp(argv[i], "ls") == 0) { ls(kwicdP); }
 
-        else if (strcmp(argv[i], "rm" ) == 0) { // delAlias
+        else if (strcmp(argv[i], "rm" ) == 0) { // delete entry
             if (i + 1 >= argc) { usage(); return 1; }
             delAlias(argv[i + 1], kwicdP, tempKwicdP);
             i += 1;
@@ -84,9 +79,7 @@ int main(int argc, char *argv[]) {
         } 
 
 
-        else {
-            usage();
-        }
+        else { usage(); }
     }
     return 0;
 }

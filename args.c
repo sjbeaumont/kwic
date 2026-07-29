@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "include/flags.h"
+#include "include/args.h"
 
 void append(const char *alias, const char *value, const char *kwicdP) {
     FILE *kwicd;
@@ -78,4 +78,19 @@ void delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
 
     remove(kwicdP);
     rename(tempKwicdP, kwicdP);
+}
+
+void ls(const char *kwicdP) {
+    FILE *kwicd;
+
+    char line[4096];
+    kwicd = fopen(kwicdP, "r");
+
+    if (!kwicd) { printf("Kwicd file not found."); exit(1); }
+
+    while (fgets(line, sizeof(line), kwicd)) {
+        printf("%s", line);
+    }
+
+    fclose(kwicd);
 }
