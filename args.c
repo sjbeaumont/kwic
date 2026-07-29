@@ -9,6 +9,7 @@
 #include <string.h>
 #include "include/args.h"
 
+// write a new entry with given alias and value
 void append(const char *alias, const char *value, const char *kwicdP) {
     FILE *kwicd;
     kwicd = fopen(kwicdP, "a");
@@ -19,6 +20,7 @@ void append(const char *alias, const char *value, const char *kwicdP) {
     fclose(kwicd);
 }
 
+// copy a value to keyboard
 void copy(const char *alias, const char *kwicdP) {
     FILE *kwicd;
     char line[4096];
@@ -49,6 +51,7 @@ void copy(const char *alias, const char *kwicdP) {
     fclose(kwicd);
 }
 
+// delete an entry
 void delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
     FILE *kwicd;
     FILE *temp;
@@ -80,6 +83,7 @@ void delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
     rename(tempKwicdP, kwicdP);
 }
 
+// print each line of the kwicd file
 void ls(const char *kwicdP) {
     FILE *kwicd;
 

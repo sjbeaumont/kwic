@@ -1,8 +1,10 @@
-#
-#   Copyright (c) 2026 Sam (sjbeaumont)
-#   SPDX-License-Identifier: MIT
-#   Distributed under the terms of the MIT License.
-#
+#########################################################
+##                                                     ##
+##   Copyright (c) 2026 Sam (sjbeaumont)               ##
+##   SPDX-License-Identifier: MIT                      ##
+##   Distributed under the terms of the MIT License.   ##
+##                                                     ##
+#########################################################
 
 # compiler and flags
 CC = gcc
