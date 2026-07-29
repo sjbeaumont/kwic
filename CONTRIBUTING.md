@@ -16,7 +16,7 @@ Kwic welcomes any contribution that will move the project foward; this doesn't j
 
 <br>
 
-> *Working on your first Pull Request? Me too 😅. Check out how to get started [here.](http://firsttimersonly.com)
+> *Working on your first Pull Request? Me too 😅. Check out how to get started [here.](http://firsttimersonly.com)*
 
 <br>
 
