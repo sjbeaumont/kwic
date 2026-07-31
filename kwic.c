@@ -51,21 +51,21 @@ int main(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {
 
         // make new entry
-        if (strcmp(argv[i], "-n") == 0) {
+        if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "new") == 0) {
             if (i + 2 >= argc) { usage(); return 1; }
             append(argv[i + 1], argv[i + 2], kwicdP);
             i += 2;
         } 
         
         // copy entry to clipboard
-        else if (strcmp(argv[i], "-c") == 0) {
+        else if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "copy") == 0) {
             if (i + 1 >= argc) { usage(); return 1; }
             copy(argv[i + 1], kwicdP);
             i += 1;
         }
 
         // rename an alias
-        else if (strcmp(argv[i], "-r") == 0) {
+        else if (strcmp(argv[i], "-r") == 0 || strcmp(argv[i], "rename") == 0) {
             if (i + 2 >= argc) { usage(); return 1; }
 
             delAlias(argv[i + 1], kwicdP, tempKwicdP);
@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[i], "ls") == 0) { ls(kwicdP); }
 
         // delete entry
-        else if (strcmp(argv[i], "rm" ) == 0) {
+        else if (strcmp(argv[i], "rm" ) == 0 ||) {
             if (i + 1 >= argc) { usage(); return 1; }
             delAlias(argv[i + 1], kwicdP, tempKwicdP);
             i += 1;
