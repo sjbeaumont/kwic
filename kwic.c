@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[i], "ls") == 0) { ls(kwicdP); }
 
         // delete entry
-        else if (strcmp(argv[i], "rm" ) == 0 ||) {
+        else if (strcmp(argv[i], "rm") == 0) {
             if (i + 1 >= argc) { usage(); return 1; }
             delAlias(argv[i + 1], kwicdP, tempKwicdP);
             i += 1;
