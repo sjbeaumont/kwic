@@ -51,6 +51,31 @@ void copy(const char *alias, const char *kwicdP) {
     fclose(kwicd);
 }
 
+// output value
+void print(const char *alias, const char *kwicdP) {
+    FILE *kwicd;
+    char line[4096];
+
+    kwicd = fopen(kwicdP, "r");
+    if (!kwicd) { printf("Kwicd file not found."); exit(1); }
+    
+    while (fgets(line, sizeof(line), kwicd)) {
+        line[strcspn(line, "\r\n")] = '\0';
+
+        char *colon = strchr(line, ':');
+        if (!colon) continue;
+
+        *colon = '\0';
+        char *key = line; // alias
+        char *val = colon + 1; // value
+
+        if (strcmp(key, alias) != 0) continue; // doesn't match
+
+        // matches
+        printf("%s", val);
+    }
+}
+
 // delete an entry
 void delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
     FILE *kwicd;

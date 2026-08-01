@@ -52,14 +52,14 @@ int main(int argc, char *argv[]) {
 
         // make new entry
         if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "new") == 0) {
-            if (i + 2 >= argc) { usage(); return 1; }
+            if (i + 2 >= argc) { usage(); return 1; } // this ensures there are two extra arg for the entry alias and value
             append(argv[i + 1], argv[i + 2], kwicdP);
             i += 2;
         } 
         
         // copy entry to clipboard
         else if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "copy") == 0) {
-            if (i + 1 >= argc) { usage(); return 1; }
+            if (i + 1 >= argc) { usage(); return 1; } // this does the same but for one extra arg
             copy(argv[i + 1], kwicdP);
             i += 1;
         }
@@ -71,6 +71,13 @@ int main(int argc, char *argv[]) {
             delAlias(argv[i + 1], kwicdP, tempKwicdP);
             append(argv[i + 2], renameValue, kwicdP);
             i += 2;
+        }
+
+        // output value - see README.md for example usage
+        else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "print") == 0) {
+            if (i + 1 >= argc) { usage(); return 1; }
+            print(argv[i + 1], kwicdP);
+            i++;
         }
 
         // list all entries

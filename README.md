@@ -1,6 +1,6 @@
 # Kwic
 
-Kwic is a tool that means you never have to find your API keys again. Just save it once under a name, and retrieve it whenever you need. Of course, this doesn't have to be for API keys, use it to store whatever text you need.<br>
+Kwic is a tool that stops you forgetting you auth keys, API keys, or any long strings of text you may need. Instead of rooting through files to find them, just save it in an entry under an alias, and copy it to your clipboard with one short command.<br>
 
 
 > **Important:** if you don't want to read the whole thing, please just take a look at [this](#disclaimer) and especially **[this.](#dependencies)** For **copyright info** view the [license.](LICENSE)
@@ -11,29 +11,29 @@ Kwic is a tool that means you never have to find your API keys again. Just save 
 
 Kwic was made quite simple. It only has a few commands you need:
 
-- Register a key `kwic -n my-api-key thisismyapikey`
+- Make a new entry: ```kwic -n entryalias entryvalue```
 
-- Copy a key to clipboard `kwic -c my-api-key`
+- Copy a value: ```kwic -c entryalias```
 
-- Rename a key `kwic -r my-api-key new-name`
+- Rename an alias: ```kwic -r oldalias newalias```
 
-- List all saved keys `kwic ls`
+- Print a value: ```kwic -p entryalias```
 
-    This will return something that looks like this:
+    This probably doesn't seem like a very useful one, so here's an example use:
 
-    ```
-    my-api-key:thisismyapikey
-    github-token:ghp_whatevermytokenis
-    stackpassword:mystackoverflowpassword
-    ```
+    ```kwic -n pth /home/<home>/path/to/my/project```
 
-    The colon simply acts as a separator between the name you set, and the value.
+    ```cd $(kwic -p pth)``` This would cd into your project directory!
 
-- Delete a key `kwic rm my-api-key`
+- List all entries: ```kwic ls```
+
+- Remove an entry: ```kwic rm entryalias```
+
+- Clear your clipboard history: ```kwic clear```
 
 ## Disclaimer
 
-I've only been coding C for a month now, and this is the first project I've built in it. I know the code probably won't be up to your standards, so please feel free to make a pull request and help me out. This is the first time I've worked with a low level language due to being in secondary school.
+I've only been coding C for a couple of months now, and this is the first project I've built in it. Expect there to be bugs / errors I won't have picked up on.
 
 Feel free to expand this and make any pull requests to help improve.
 
