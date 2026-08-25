@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2026 Sam (sjbeaumont)
- * SPDX-License-Identifier: MIT
- * Distributed under the terms of the MIT License.
- */
-
 #ifndef FLAGS_H
 #define FLAGS_H
 
