@@ -78,12 +78,6 @@ int main(int argc, char *argv[]) {
 			return ext;
         }
 
-		// list all entries
-        else if (strcmp(argv[i], "ls") == 0) {
-			int ext = ls(kwicdP);
-			return ext;
-		}
-
         // delete entry
         else if (strcmp(argv[i], "rm") == 0) {
             if (i + 1 >= argc) { usage(); return 1; }
@@ -91,6 +85,12 @@ int main(int argc, char *argv[]) {
             i += 1;
 			return ext;
         }
+
+		// list all entries
+        else if (strcmp(argv[i], "ls") == 0) {
+			int ext = ls(kwicdP);
+			return ext;
+		}
 
         // clear clipboard
         else if (strcmp(argv[i], "clear") == 0) {
