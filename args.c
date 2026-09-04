@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "include/args.h"
+#include "include/other.h"
 
 // write a new entry with given alias and value
 int append(const char *alias, const char *value, const char *kwicdP) {
     FILE *kwicd;
     kwicd = fopen(kwicdP, "a");
-    if (!kwicd) { printf("Kwicd file not found :(\n"); return 1; };
+    if (!kwicd) { printf("Kwicd file not found :(\n"); return 1; }
 
     fprintf(kwicd, "%s:%s\n", alias, value);
     fflush(kwicd);
@@ -135,4 +137,34 @@ int ls(const char *kwicdP) {
     fclose(kwicd);
 
     return 0;
+}
+
+// delete and remake (effectively clearing) the kwicd file
+// TODO: reset colour on abortion
+int purge(const char *kwicdP) {
+	char cmd[256];
+
+    printf("Purging files (control+C to abort)\n");
+    printf("Purging in " red bold "5"); fflush(stdout); sleep(1);
+	printf(" 4"); fflush(stdout); sleep(1);
+	printf(" 3"); fflush(stdout); sleep(1);
+	printf(" 2"); fflush(stdout); sleep(1);
+	printf(" 1"); fflush(stdout); sleep(1);
+	printf(" purging...\n" reset);
+
+	snprintf(cmd, sizeof(cmd), "rm %s", kwicdP);
+	if (system(cmd) != 0) {
+		printf("Couldn't purge kwicd file :(\n");
+		return 1;
+	}
+
+	FILE *kwicd;
+	kwicd = fopen(kwicdP, "w");
+
+	if (!kwicd) { printf("Kwicd file couldn't be created :(\n"); return 1; }
+
+	fclose(kwicd);
+
+	printf("Purged kwicd file successfully.");
+	return 0;
 }

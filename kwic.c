@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[i], "rm") == 0) {
             if (i + 1 >= argc) { usage(); return 1; }
             int ext = delAlias(argv[i + 1], kwicdP, tempKwicdP);
-            i += 1;
+            i++;
 			return ext;
         }
 
@@ -92,10 +92,18 @@ int main(int argc, char *argv[]) {
 			return ext;
 		}
 
+        // delete kwicd file
+		else if (strcmp(argv[i], "purge") == 0) {
+            int ext = purge(kwicdP);
+            i++;
+            return ext;
+		}
+
         // clear clipboard
         else if (strcmp(argv[i], "clear") == 0) {
             if (system("printf '' | wl-copy") != 0) { // err clearing clipboard
                 printf("Couldn't clear clipboard :(\n");
+                i++;
                 return 1;
             }
         } 

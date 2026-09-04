@@ -9,5 +9,6 @@ int copy(const char *alias, const char *kwicdP);
 int print(const char *alias, const char *kwicdP);
 int delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP);
 int ls(const char *kwicdP);
+int purge(const char *kwicdP);
 
 #endif
