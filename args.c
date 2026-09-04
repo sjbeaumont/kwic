@@ -38,7 +38,9 @@ void copy(const char *alias, const char *kwicdP) {
         // matches:
         char cmd[8192];
         snprintf(cmd, sizeof(cmd), "wl-copy '%s'", val);
-        system(cmd);
+        if(system(cmd) != 0) {
+            printf("Couldn't copy to clipboard.");
+        }
         break;
     }
 

@@ -86,7 +86,10 @@ int main(int argc, char *argv[]) {
 
         // clear clipboard
         else if (strcmp(argv[i], "clear") == 0) {
-            system("printf '' | wl-copy");
+            if (system("printf '' | wl-copy") != 0) { // err clearing clipboard
+                printf("Couldn't clear clipboard.");
+                return 1;
+            }
         } 
 
 
