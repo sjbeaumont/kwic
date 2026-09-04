@@ -4,23 +4,25 @@
 #include "include/args.h"
 
 // write a new entry with given alias and value
-void append(const char *alias, const char *value, const char *kwicdP) {
+int append(const char *alias, const char *value, const char *kwicdP) {
     FILE *kwicd;
     kwicd = fopen(kwicdP, "a");
-    if (!kwicd) { printf("Kwicd file not found."); exit(1); };
+    if (!kwicd) { printf("Kwicd file not found.\n"); return 1; };
 
     fprintf(kwicd, "%s:%s\n", alias, value);
     fflush(kwicd);
     fclose(kwicd);
+    
+    return 0;
 }
 
 // copy a value to keyboard
-void copy(const char *alias, const char *kwicdP) {
+int copy(const char *alias, const char *kwicdP) {
     FILE *kwicd;
     char line[4096];
 
     kwicd = fopen(kwicdP, "r");
-    if (!kwicd) { printf("Kwicd file not found."); exit(1); }
+    if (!kwicd) { printf("Kwicd file not found.\n"); return 1; }
 
     while (fgets(line, sizeof(line), kwicd)) {
         line[strcspn(line, "\r\n")] = '\0';
@@ -39,21 +41,26 @@ void copy(const char *alias, const char *kwicdP) {
         char cmd[8192];
         snprintf(cmd, sizeof(cmd), "wl-copy '%s'", val);
         if(system(cmd) != 0) {
-            printf("Couldn't copy to clipboard.");
+            printf("Couldn't copy to clipboard.\n");
+            fclose(kwicd);
+            return 1;
         }
-        break;
+        fclose(kwicd);
+        return 0;
     }
 
     fclose(kwicd);
+    printf("Alias not found.\n");
+    return 1;
 }
 
 // output value
-void print(const char *alias, const char *kwicdP) {
+int print(const char *alias, const char *kwicdP) {
     FILE *kwicd;
     char line[4096];
 
     kwicd = fopen(kwicdP, "r");
-    if (!kwicd) { printf("Kwicd file not found."); exit(1); }
+    if (!kwicd) { printf("Kwicd file not found.\n"); return 1; }
     
     while (fgets(line, sizeof(line), kwicd)) {
         line[strcspn(line, "\r\n")] = '\0';
@@ -68,12 +75,18 @@ void print(const char *alias, const char *kwicdP) {
         if (strcmp(key, alias) != 0) continue; // doesn't match
 
         // matches
-        printf("%s", val);
+        printf("%s\n", val);
+        fclose(kwicd);
+        return 0;
     }
+
+    fclose(kwicd);
+    printf("Alias not found\n");
+    return 1;
 }
 
 // delete an entry
-void delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
+int delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
     FILE *kwicd;
     FILE *temp;
 
@@ -81,14 +94,14 @@ void delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
     int cur_ln = 1;
     int del_ln = scan(alias, kwicdP);
 
-    if (del_ln == -2) { printf("Kwicd file not found.\n"); exit(1); }
-    else if (del_ln == -1) { printf("Alias not found.\n"); exit(1); }
+    if (del_ln == -2) { printf("Kwicd file not found.\n"); return 1; }
+    else if (del_ln == -1) { printf("Alias not found.\n"); return 1; }
     
     kwicd = fopen(kwicdP, "r");
     temp = fopen(tempKwicdP, "w");
 
-    if (!kwicd) { printf("Kwicd file not found."); exit(1); }
-    if (!temp) {printf("Temporary Kwicd file could not be created."); exit(1); }
+    if (!kwicd) { printf("Kwicd file not found.\n"); return 1; }
+    if (!temp) {printf("Temporary Kwicd file could not be created.\n"); fclose(kwicd); return 1; }
 
     while (fgets(line, sizeof(line), kwicd)) {
         if (cur_ln != del_ln) {
@@ -102,20 +115,24 @@ void delAlias(const char *alias, const char *kwicdP, const char *tempKwicdP) {
 
     remove(kwicdP);
     rename(tempKwicdP, kwicdP);
+
+    return 0;
 }
 
 // print each line of the kwicd file
-void ls(const char *kwicdP) {
+int ls(const char *kwicdP) {
     FILE *kwicd;
 
     char line[4096];
     kwicd = fopen(kwicdP, "r");
 
-    if (!kwicd) { printf("Kwicd file not found."); exit(1); }
+    if (!kwicd) { printf("Kwicd file not found.\n"); return 1; }
 
     while (fgets(line, sizeof(line), kwicd)) {
         printf("%s", line);
     }
 
     fclose(kwicd);
+
+    return 0;
 }

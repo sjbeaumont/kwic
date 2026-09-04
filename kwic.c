@@ -47,15 +47,17 @@ int main(int argc, char *argv[]) {
         // make new entry
         if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "new") == 0) {
             if (i + 2 >= argc) { usage(); return 1; } // this ensures there are two extra arg for the entry alias and value
-            append(argv[i + 1], argv[i + 2], kwicdP);
+            int ext = append(argv[i + 1], argv[i + 2], kwicdP);
             i += 2;
+            return ext;
         } 
         
         // copy entry to clipboard
         else if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "copy") == 0) {
             if (i + 1 >= argc) { usage(); return 1; } // this does the same but for one extra arg
-            copy(argv[i + 1], kwicdP);
+            int ext = copy(argv[i + 1], kwicdP);
             i += 1;
+            return ext;
         }
 
         // rename an alias
@@ -63,25 +65,31 @@ int main(int argc, char *argv[]) {
             if (i + 2 >= argc) { usage(); return 1; }
 
             delAlias(argv[i + 1], kwicdP, tempKwicdP);
-            append(argv[i + 2], renameValue, kwicdP);
+            int ext = append(argv[i + 2], renameValue, kwicdP);
             i += 2;
+            return ext;
         }
 
         // output value - see README.md for example usage
         else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "print") == 0) {
             if (i + 1 >= argc) { usage(); return 1; }
-            print(argv[i + 1], kwicdP);
+            int ext = print(argv[i + 1], kwicdP);
             i++;
+			return ext;
         }
 
-        // list all entries
-        else if (strcmp(argv[i], "ls") == 0) { ls(kwicdP); }
+		// list all entries
+        else if (strcmp(argv[i], "ls") == 0) {
+			int ext = ls(kwicdP);
+			return ext;
+		}
 
         // delete entry
         else if (strcmp(argv[i], "rm") == 0) {
             if (i + 1 >= argc) { usage(); return 1; }
-            delAlias(argv[i + 1], kwicdP, tempKwicdP);
+            int ext = delAlias(argv[i + 1], kwicdP, tempKwicdP);
             i += 1;
+			return ext;
         }
 
         // clear clipboard
