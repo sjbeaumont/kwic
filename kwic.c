@@ -24,7 +24,7 @@ static int mkdir_if_missing(const char *dir) {
 
 // user usage error
 static void usage(void) {
-    printf("Usage error.\n");
+    printf("Usage error :(\n");
     exit(1);
 }
 
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
         // clear clipboard
         else if (strcmp(argv[i], "clear") == 0) {
             if (system("printf '' | wl-copy") != 0) { // err clearing clipboard
-                printf("Couldn't clear clipboard.");
+                printf("Couldn't clear clipboard :(\n");
                 return 1;
             }
         } 
