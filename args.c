@@ -149,9 +149,8 @@ int ls(const char *kwicdP) {
 }
 
 // delete and remake (effectively clearing) the kwicd file
-// TODO: reset colour on abortion
 int purge(const char *kwicdP) {
-    signal(SIGINT, sigint_handle);
+    signal(SIGINT, sigint_handle); // handle in case of abort
 	char cmd[256];
 
     printf("Purging files (control+C to abort)\n");
