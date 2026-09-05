@@ -5,6 +5,15 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
+/**
+ * TODO
+ * 
+ * transfer `system` to popen for security
+ * make more user friendly - success outputs
+ * update to clearer docs - someone PLSS help w that
+ * 
+ */
+
 // declare global variables
 char kwicdP[256];
 char tempKwicdP[256];
