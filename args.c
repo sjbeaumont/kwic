@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 #include <unistd.h>
 #include "include/args.h"
 #include "include/other.h"
+
+static void sigint_handle(int sig) {
+    (void)sig;
+    printf(" Aborted :)\n" RESET);
+    fflush(stdout);
+    exit(0);
+}
+
 
 // write a new entry with given alias and value
 int append(const char *alias, const char *value, const char *kwicdP) {
@@ -142,15 +151,16 @@ int ls(const char *kwicdP) {
 // delete and remake (effectively clearing) the kwicd file
 // TODO: reset colour on abortion
 int purge(const char *kwicdP) {
+    signal(SIGINT, sigint_handle);
 	char cmd[256];
 
     printf("Purging files (control+C to abort)\n");
-    printf("Purging in " red bold "5"); fflush(stdout); sleep(1);
+    printf("Purging in " RED BOLD "5"); fflush(stdout); sleep(1);
 	printf(" 4"); fflush(stdout); sleep(1);
 	printf(" 3"); fflush(stdout); sleep(1);
 	printf(" 2"); fflush(stdout); sleep(1);
 	printf(" 1"); fflush(stdout); sleep(1);
-	printf(" purging...\n" reset);
+	printf(" purging...\n" RESET);
 
 	snprintf(cmd, sizeof(cmd), "rm %s", kwicdP);
 	if (system(cmd) != 0) {
