@@ -1,4 +1,4 @@
-# Kwic
+<img src="logos/kwictext.svg" width="50%">
 
 Kwic is a tool that stops you forgetting you auth keys, API keys, or any long strings of text you may need. Instead of rooting through files to find them, just save it in an entry under an alias, and copy it to your clipboard with one short command.<br>
 
